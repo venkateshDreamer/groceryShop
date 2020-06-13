@@ -1,18 +1,28 @@
-import React, { Component,useState } from 'react';
+import React, { Component,useState,useContext} from 'react';
 import { Link } from 'react-router-dom'
 import Auth from 'config/auth'
+import Context from "store/context";
+
 const HeaderNavBar = () => {
     const [topMenu, setTopMenu] = useState(false);
+    const [sidemenu, setSidemenu] = useState(false);
+    const { state, dispatch } = useContext(Context);
+
     const topMenuBtn = () => {
         setTopMenu(!topMenu)
     }
     const signOut = () => {
         Auth.signout();
     }
+    async function sideMenu(){
+        setSidemenu(!sidemenu)
+        dispatch({ type: "SIDE_NAV_BAR", payload: sidemenu });
+    }
+
     return (
         <>
             <nav className="navbar navbar-expand navbar-light bg-white">
-                <Link to="" className="sidebar-toggle d-flex mr-2">
+                <Link to="#" onClick={()=> sideMenu()} className="sidebar-toggle d-flex mr-2">
                     <i className="hamburger align-self-center" />
                 </Link>
                 <div className="navbar-collapse collapse">

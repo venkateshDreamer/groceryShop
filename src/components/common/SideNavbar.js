@@ -1,14 +1,16 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState,useContext } from 'react';
 import { Link } from 'react-router-dom'
-import logo from '../../assets/img/fandashtic-logo-full.svg'
+import logo from '../../assets/img/fandashtic-logo-full.svg';
+import Context from "store/context";
 const SideNavbar = () => {
     const [sideMenu, setSideMenu] = useState(false);
+    const { state, dispatch } = useContext(Context);
     const sideMenuBtn = () => {
         setSideMenu(!sideMenu)
     }
     return (
         <>
-            <nav id="sidebar" className="sidebar">
+            <nav id="sidebar" className={state.isSideNavMenu ? "sidebar" : "sidebar toggled"}>
                 <div className="sidebar-content ">
                     <Link to="/dashboard" className="sidebar-brand" >
                         <img src={logo} />
